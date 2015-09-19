@@ -7,8 +7,8 @@ public class ContestantInformation {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ContestantInformation(String firstName, String lastName, int streetNumber, String streetName, 
-			String city, String province, String postalCode, int phoneNum, int birthDate) {
+	public ContestantInformation(String firstName, String lastName, int streetNumber, String streetName, String city,
+			String province, String postalCode, int phoneNum, int birthDate) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthDate = "" + birthDate;
@@ -22,56 +22,72 @@ public class ContestantInformation {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public void setLastName(String lastName){
+
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public void setStreetNumber(String streetNumber){
+
+	public void setStreetNumber(String streetNumber) {
 		this.streetNumber = streetNumber;
 	}
-	public void setStreetName(String streetName){
+
+	public void setStreetName(String streetName) {
 		this.streetName = streetName;
 	}
-	public void setCity(String city){
+
+	public void setCity(String city) {
 		this.city = city;
 	}
-	public void setProvince(String province){
+
+	public void setProvince(String province) {
 		this.province = province;
 	}
-	public void setPostalCode(String postalCode){
+
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-	public void setPhoneNum(String phoneNum){
+
+	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-	public void setBirthDate(String birthDate){
+
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
-	public String getFirstName(){
+
+	public String getFirstName() {
 		return this.firstName;
 	}
-	public String getLastName(){
+
+	public String getLastName() {
 		return this.lastName;
 	}
-	public 	String getStreetNumber(){
+
+	public String getStreetNumber() {
 		return this.streetName;
 	}
-	public String getStreetName(){
+
+	public String getStreetName() {
 		return this.streetName;
 	}
-	public String getCity(){
+
+	public String getCity() {
 		return this.city;
 	}
-	public String getProvince(){
+
+	public String getProvince() {
 		return this.province;
 	}
-	public String getPostalCode(){
+
+	public String getPostalCode() {
 		return this.postalCode;
 	}
-	public String getPhoneNum(){
+
+	public String getPhoneNum() {
 		return this.phoneNum;
 	}
-	public String getBirthDate(){
-	return this.birthDate;
+
+	public String getBirthDate() {
+		return this.birthDate;
 	}
-	}
-	
+}
