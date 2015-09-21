@@ -9,15 +9,20 @@
  */
 package kalsi;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ContestantInformation {
-	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDate;
+	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
+	private Calendar birthDate  = new GregorianCalendar();
+
 	/**
 	 * 
 	 */
 	public ContestantInformation() {
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * 
 	 * @param firstName
@@ -31,145 +36,165 @@ public class ContestantInformation {
 	 * @param birthDate
 	 */
 	public ContestantInformation(String firstName, String lastName, int streetNumber, String streetName, String city,
-			String province, String postalCode, int phoneNum, int birthDate) {
+			String province, String postalCode, int phoneNum, Calendar birthDate) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.birthDate = "" + birthDate;
+		this.birthDate = birthDate;
 		this.streetNumber = "" + streetNumber;
 		this.streetName = streetName;
 		this.city = city;
 		this.postalCode = postalCode;
 		this.phoneNum = "" + phoneNum;
 	}
-/**
- * 
- * @param firstName
- */
+
+	/**
+	 * 
+	 * @param firstName
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-/**
- * 
- * @param lastName
- */
+
+	/**
+	 * 
+	 * @param lastName
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-/**
- * 
- * @param streetNumber
- */
+
+	/**
+	 * 
+	 * @param streetNumber
+	 */
 	public void setStreetNumber(String streetNumber) {
 		this.streetNumber = streetNumber;
 	}
-/**
- * 
- * @param streetName
- */
+
+	/**
+	 * 
+	 * @param streetName
+	 */
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
 	}
-/**
- * 
- * @param city
- */
+
+	/**
+	 * 
+	 * @param city
+	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
-/**
- * 
- * @param province
- */
+
+	/**
+	 * 
+	 * @param province
+	 */
 	public void setProvince(String province) {
 		this.province = province;
 	}
-/**
- * 
- * @param postalCode
- */
+
+	/**
+	 * 
+	 * @param postalCode
+	 */
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-/**
- * 
- * @param phoneNum
- */
+
+	/**
+	 * 
+	 * @param phoneNum
+	 */
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-/**
- * 
- * @param birthDate
- */
-	public void setBirthDate(String birthDate) {
-		this.birthDate = birthDate;
+
+	/**
+	 * 
+	 * @param birthDate
+	 */
+	public void setBirthDate(int yyyy,int mm, int dd) {
+		this.birthDate.set(yyyy, mm, dd);
+		this.birthDateString = this.birthDate.toString();
 	}
-/**
- * 
- * @return the first name
- */
+
+	/**
+	 * 
+	 * @return the first name
+	 */
 	public String getFirstName() {
 		return this.firstName;
 	}
-/**
- * 
- * @return the last name
- */
+
+	/**
+	 * 
+	 * @return the last name
+	 */
 	public String getLastName() {
 		return this.lastName;
 	}
-/**
- * 
- * @return the street number
- */
+
+	/**
+	 * 
+	 * @return the street number
+	 */
 	public String getStreetNumber() {
 		return this.streetName;
 	}
-/**
- * 
- * @return the street name
- */
+
+	/**
+	 * 
+	 * @return the street name
+	 */
 	public String getStreetName() {
 		return this.streetName;
 	}
-/**
- * 
- * @return the city
- */
+
+	/**
+	 * 
+	 * @return the city
+	 */
 	public String getCity() {
 		return this.city;
 	}
-/**
- * 
- * @return the province
- */
+
+	/**
+	 * 
+	 * @return the province
+	 */
 	public String getProvince() {
 		return this.province;
 	}
-/**
- * 
- * @return the Postal Code
- */
+
+	/**
+	 * 
+	 * @return the Postal Code
+	 */
 	public String getPostalCode() {
 		return this.postalCode;
 	}
-/**
- * 
- * @return the Phone Number
- */
+
+	/**
+	 * 
+	 * @return the Phone Number
+	 */
 	public String getPhoneNum() {
 		return this.phoneNum;
 	}
-/**
- * 
- * @return the birthDate
- */
+
+	/**
+	 * 
+	 * @return the birthDate
+	 */
 	public String getBirthDate() {
-		return this.birthDate;
+		return this.birthDateString;
 	}
-/**
- * 
- */
+
+	/**
+	 * @return everything
+	 */
 	public String toString() {
 		return ("Name: " + firstName + " " + lastName + " City: " + city + " Province: " + province + " Postal Code: "
 				+ postalCode + " Street name: " + streetName + " Street Number: " + streetNumber + " Phone Number"
