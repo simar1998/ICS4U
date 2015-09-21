@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 
 public class ContestantInformation {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
-	private Calendar birthDate  = new GregorianCalendar();
+	private Calendar birthDate = new GregorianCalendar();
 
 	/**
 	 * 
@@ -113,9 +113,9 @@ public class ContestantInformation {
 
 	/**
 	 * 
-	 * @param birthDate
+	 * @param yyyy mm dd
 	 */
-	public void setBirthDate(int yyyy,int mm, int dd) {
+	public void setBirthDate(int yyyy, int mm, int dd) {
 		this.birthDate.set(yyyy, mm, dd);
 		this.birthDateString = this.birthDate.toString();
 	}
@@ -130,7 +130,7 @@ public class ContestantInformation {
 
 	/**
 	 * 
-	 * @return the last name
+	 * @return the lastName
 	 */
 	public String getLastName() {
 		return this.lastName;
@@ -175,6 +175,7 @@ public class ContestantInformation {
 	public String getPostalCode() {
 		return this.postalCode;
 	}
+
 
 	/**
 	 * 
