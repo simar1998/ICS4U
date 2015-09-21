@@ -1,7 +1,7 @@
 package kalsi;
 
 public class ContestantInformation {
-	String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDate;
+	String firstName, lastName, city, province, postalCode, streetName, streetNumber,phoneNum, birthDate;
 
 	public ContestantInformation() {
 		// TODO Auto-generated constructor stub
@@ -90,4 +90,10 @@ public class ContestantInformation {
 	public String getBirthDate() {
 		return this.birthDate;
 	}
-}
+	public void printAll(){
+		System.out.println("Name: "+ firstName +" " + lastName
+				+" City: "+city+" Province: "+  province +" Postal Code: "+ postalCode +" Street name: "+
+				streetName+" Street Number: "+  streetNumber+ " Phone Number" +phoneNum+
+				" Birthdate: "+birthDate);
+	}
+	}
