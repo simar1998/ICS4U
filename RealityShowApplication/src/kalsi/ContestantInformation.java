@@ -12,6 +12,8 @@ package kalsi;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+
 public class ContestantInformation {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
 	private Calendar birthDate = new GregorianCalendar();
@@ -98,11 +100,25 @@ public class ContestantInformation {
 	/**
 	 * 
 	 * @param postalCode
+	 * @throws InvalidInputExeption
 	 */
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+	public void setPostalCode(String postalCode) throws InvalidInputExeption {
+		if(postalCode.length() > 6){
+			throw new InvalidInputExeption("The postal code given has more that 6 digits");
+		} 
+		else if(postalCode.length() < 6){
+			throw new InvalidInputExeption("The postal code given has less that 6 digits");
+		}
+		for(int i = 0; i < 6; i++){
+		i++;
+		if(Character.isLetter(postalCode.charAt(i -1))){
+			throw new InvalidInputExeption("Incorrect Format");
+		}
+		if(!Character.isLetter(postalCode.charAt(i))){
+			throw new InvalidInputExeption("Incorrect Format");
+		}
 	}
-
+	}
 	/**
 	 * 
 	 * @param phoneNum
