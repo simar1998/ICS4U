@@ -17,7 +17,10 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 public class ContestantInformation {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
 	private Calendar birthDate = new GregorianCalendar();
-
+	public enum province{
+	on,bc,pe,ab,mb,nb,bl,ns,nt,qc,sk,yt
+	
+	}
 	/**
 	 * 
 	 */
@@ -103,22 +106,22 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setPostalCode(String postalCode) throws InvalidInputExeption {
-		if(postalCode.length() > 6){
+		if (postalCode.length() > 6) {
 			throw new InvalidInputExeption("The postal code given has more that 6 digits");
-		} 
-		else if(postalCode.length() < 6){
+		} else if (postalCode.length() < 6) {
 			throw new InvalidInputExeption("The postal code given has less that 6 digits");
 		}
-		for(int i = 0; i < 6; i++){
-		i++;
-		if(Character.isLetter(postalCode.charAt(i -1))){
-			throw new InvalidInputExeption("Incorrect Format");
-		}
-		if(!Character.isLetter(postalCode.charAt(i))){
-			throw new InvalidInputExeption("Incorrect Format");
+		for (int i = 0; i < 6; i++) {
+			i++;
+			if (Character.isLetter(postalCode.charAt(i - 1))) {
+				throw new InvalidInputExeption("Incorrect Format");
+			}
+			if (!Character.isLetter(postalCode.charAt(i))) {
+				throw new InvalidInputExeption("Incorrect Format");
+			}
 		}
 	}
-	}
+
 	/**
 	 * 
 	 * @param phoneNum
@@ -129,7 +132,8 @@ public class ContestantInformation {
 
 	/**
 	 * 
-	 * @param yyyy mm dd
+	 * @param yyyy
+	 *            mm dd
 	 */
 	public void setBirthDate(int yyyy, int mm, int dd) {
 		this.birthDate.set(yyyy, mm, dd);
@@ -192,7 +196,6 @@ public class ContestantInformation {
 		return this.postalCode;
 	}
 
-
 	/**
 	 * 
 	 * @return the Phone Number
@@ -217,4 +220,5 @@ public class ContestantInformation {
 				+ postalCode + " Street name: " + streetName + " Street Number: " + streetNumber + " Phone Number"
 				+ phoneNum + " Birthdate: " + birthDate);
 	}
+	
 }
