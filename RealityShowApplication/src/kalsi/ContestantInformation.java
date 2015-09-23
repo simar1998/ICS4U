@@ -17,10 +17,13 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 public class ContestantInformation {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
 	private Calendar birthDate = new GregorianCalendar();
-	public enum province{
-	on,bc,pe,ab,mb,nb,bl,ns,nt,qc,sk,yt
-	
+
+	public enum Province {
+		on, bc, pe, ab, mb, nb, bl, ns, nt, qc, sk, yt, Alberta, BritishColumbia, Manitoba, NewBrunswick, NewfoundlandandLabrador, NovaScotia, Ontario, PrinceEdwardIsland, Quebec, Saskatchewan, NorthwestTerritories, Nunavut, Yukon
 	}
+
+	Province provinceEnum;
+
 	/**
 	 * 
 	 */
@@ -57,7 +60,7 @@ public class ContestantInformation {
 	 * @param firstName
 	 */
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = firstName.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -65,7 +68,7 @@ public class ContestantInformation {
 	 * @param lastName
 	 */
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = lastName.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -73,7 +76,7 @@ public class ContestantInformation {
 	 * @param streetNumber
 	 */
 	public void setStreetNumber(String streetNumber) {
-		this.streetNumber = streetNumber;
+		this.streetNumber = streetNumber.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -81,15 +84,15 @@ public class ContestantInformation {
 	 * @param streetName
 	 */
 	public void setStreetName(String streetName) {
-		this.streetName = streetName;
-	}
+		this.streetName = streetName.replaceAll("\\s", "").toLowerCase();
+	} 
 
 	/**
 	 * 
 	 * @param city
 	 */
 	public void setCity(String city) {
-		this.city = city;
+		this.city = city.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -97,7 +100,7 @@ public class ContestantInformation {
 	 * @param province
 	 */
 	public void setProvince(String province) {
-		this.province = province;
+		this.province = province.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -120,6 +123,7 @@ public class ContestantInformation {
 				throw new InvalidInputExeption("Incorrect Format");
 			}
 		}
+		this.postalCode = postalCode.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -127,7 +131,7 @@ public class ContestantInformation {
 	 * @param phoneNum
 	 */
 	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
+		this.phoneNum = phoneNum.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -220,5 +224,5 @@ public class ContestantInformation {
 				+ postalCode + " Street name: " + streetName + " Street Number: " + streetNumber + " Phone Number"
 				+ phoneNum + " Birthdate: " + birthDate);
 	}
-	
+
 }
