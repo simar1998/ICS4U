@@ -7,7 +7,7 @@ package kalsi;
  * @author 334915576
  *
  */
-public class label {
+public class LabelClass {
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class label {
 	 * 
 	 * @param ci
 	 */
-	public label(ContestantInformation ci) {
+	public LabelClass(ContestantInformation ci) {
 		// TODO Auto-generated constructor stub
 		this.ci = ci;
 	}
