@@ -10,6 +10,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.TextField;
 import java.awt.Label;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class realityShowApplication extends JFrame {
 
@@ -18,6 +23,12 @@ public class realityShowApplication extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	ArrayList<ContestantInformation> contestant = new ArrayList<ContestantInformation>();
+	String contestantObject = "";
+	ContestantInformation contestant1 = new ContestantInformation();
+	ContestantInformation contestant2 = new ContestantInformation();
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -29,7 +40,8 @@ public class realityShowApplication extends JFrame {
 				}
 			}
 		});
-		ArrayList<ContestantInformation> contestant = new ArrayList();
+		
+		
 
 	}
 
@@ -60,9 +72,9 @@ public class realityShowApplication extends JFrame {
 		label_1.setBounds(166, 78, 62, 22);
 		contentPane.add(label_1);
 
-		TextField stretNumberTextField = new TextField();
-		stretNumberTextField.setBounds(10, 106, 150, 22);
-		contentPane.add(stretNumberTextField);
+		TextField streetNumberTextField = new TextField();
+		streetNumberTextField.setBounds(10, 106, 150, 22);
+		contentPane.add(streetNumberTextField);
 
 		Label label_2 = new Label("Street Number");
 		label_2.setBounds(166, 106, 83, 22);
@@ -107,6 +119,62 @@ public class realityShowApplication extends JFrame {
 		Label label_7 = new Label("Postal Code");
 		label_7.setBounds(166, 218, 62, 22);
 		contentPane.add(label_7);
+		
+		TextField birthDateTextField = new TextField();
+		birthDateTextField.setBounds(10, 274, 150, 22);
+		contentPane.add(birthDateTextField);
+		
+		Label label_8 = new Label("Birth Date (DD/MM/YYY)");
+		label_8.setBounds(166, 274, 132, 22);
+		contentPane.add(label_8);
+		
+		Label label_9 = new Label("-----------------------------------------------------------------OUTPUT------------------------------------------------------------------------------");
+		label_9.setBounds(10, 302, 564, 22);
+		contentPane.add(label_9);
+		
+		Button submitButton = new Button("Submit");
+		submitButton.setBounds(504, 274, 70, 22);
+		contentPane.add(submitButton);
+		
+		Label informationLabel = new Label("Information will be displayed here");
+		informationLabel.setBounds(10, 10, 414, 22);
+		contentPane.add(informationLabel);
+		
+		Label outputLabel = new Label("");
+		outputLabel.setForeground(SystemColor.controlText);
+		outputLabel.setBackground(SystemColor.info);
+		outputLabel.setBounds(10, 330, 564, 147);
+		contentPane.add(outputLabel);
+		
+		TextField debugTextEdit = new TextField();
+		debugTextEdit.setBounds(430, 10, 144, 22);
+		contentPane.add(debugTextEdit);
+		
+		Button debugSubmit = new Button("DEBUG");
+		debugSubmit.setBounds(430, 38, 144, 22);
+		contentPane.add(debugSubmit);
 		this.setTitle("Reality Show Application");
+		
+		
+		TextField[] textFieldArray = {firstNameTextField, lastNameTextField,streetNumberTextField,streetNameTextField, provinceTextField,
+				postalCodeTextField , cityTextField};
+		submitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contestant1.setFirstName(firstNameTextField.getText().toString());
+				contestant1.setLastName(lastNameTextField.getText().toString());
+				contestant1.setStreetNumber(streetNumberTextField.getText().toString());
+				contestant1.setStreetName(streetNameTextField.getText().toString());
+				contestant1.setCity(cityTextField.getText().toString());
+				contestant1.setProvince(provinceTextField.getText().toString());
+				try {
+					contestant1.setPostalCode(postalCodeTextField.getText().toString());
+				} catch (InvalidInputExeption e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+	
 	}
 }
