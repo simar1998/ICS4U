@@ -30,6 +30,12 @@ public class ContestantInformation {
 	public ContestantInformation() {
 		// TODO Auto-generated constructor stub
 	}
+	public <E extends Enum<E>> boolean provinceExistance(String s, Class<E> e) {
+		  for (E e1 : e.getEnumConstants()) {
+		    if(e1.name().equals(s)) { return true; }
+		  }
+		  return false;
+		}
 
 	/**
 	 * 
@@ -99,8 +105,11 @@ public class ContestantInformation {
 	 * 
 	 * @param province
 	 */
-	public void setProvince(String province) {
+	public void setProvince(String province) throws InvalidInputExeption {
 		this.province = province.replaceAll("\\s", "").toLowerCase();
+		if(provinceExistance(province,Province.class) == false){
+			throw new InvalidInputExeption("Province does not exist");
+		}
 	}
 
 	/**

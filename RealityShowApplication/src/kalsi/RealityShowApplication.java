@@ -31,7 +31,7 @@ public class RealityShowApplication {
 				"What is your Street Name" + "What is your Sreet Number", "What city do you live in",
 				"What province are you in", "What is your postal code", "What is your phone no.",
 				"What is your birth date yyyy/mm/dd" };
-
+	
 	}
 
 	public void setMehtod(String[] s, ContestantInformation ci) {
