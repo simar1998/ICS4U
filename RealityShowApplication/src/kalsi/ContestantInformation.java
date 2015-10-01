@@ -78,46 +78,52 @@ public class ContestantInformation {
 	/**
 	 * 
 	 * @param firstName
+	 * @throws InvalidInputExeption
 	 */
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName) throws InvalidInputExeption {
 		this.firstName = firstName.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
 	 * 
 	 * @param lastName
+	 * @throws InvalidInputExeption
 	 */
-	public void setLastName(String lastName) {
+	public void setLastName(String lastName) throws InvalidInputExeption {
 		this.lastName = lastName.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
 	 * 
 	 * @param streetNumber
+	 * @throws InvalidInputExeption
 	 */
-	public void setStreetNumber(String streetNumber) {
+	public void setStreetNumber(String streetNumber) throws InvalidInputExeption {
 		this.streetNumber = streetNumber.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
 	 * 
+	 * @throws InvalidInputExeption
 	 * @param streetName
 	 */
-	public void setStreetName(String streetName) {
+	public void setStreetName(String streetName) throws InvalidInputExeption {
 		this.streetName = streetName.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
 	 * 
 	 * @param city
+	 * @throws InvalidInputExeption
 	 */
-	public void setCity(String city) {
+	public void setCity(String city) throws InvalidInputExeption {
 		this.city = city.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
 	 * 
 	 * @param province
+	 * @throws InvalidInputExeption
 	 */
 	public void setProvince(String province) throws InvalidInputExeption {
 		this.province = province.replaceAll("\\s", "").toLowerCase();
@@ -150,21 +156,24 @@ public class ContestantInformation {
 	/**
 	 * 
 	 * @param phoneNum
+	 * @throws InvalidInputExeption
 	 */
-	public void setPhoneNum(String phoneNum) {
+	public void setPhoneNum(String phoneNum) throws InvalidInputExeption {
 		this.phoneNum = phoneNum.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
 	 * 
 	 * @param yyyy
-	 *            mm dd
+	 * @param mm
+	 * @param dd
+	 * @throws InvalidInputExeption
 	 */
-	public void setBirthDate(int yyyy, int mm, int dd) {
+	public void setBirthDate(int yyyy, int mm, int dd) throws InvalidInputExeption {
 		this.birthDate.set(yyyy, mm, dd);
 		this.birthDateString = this.birthDate.toString();
 	}
-
+	
 	public void setAll(String[] s) throws InvalidInputExeption {
 		setFirstName(s[0]);
 		setLastName(s[1]);
