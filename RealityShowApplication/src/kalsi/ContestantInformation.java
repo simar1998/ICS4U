@@ -23,19 +23,33 @@ public class ContestantInformation {
 	}
 
 	Province provinceEnum;
-
+	
 	/**
 	 * 
 	 */
 	public ContestantInformation() {
 		// TODO Auto-generated constructor stub
 	}
-	public <E extends Enum<E>> boolean provinceExistance(String s, Class<E> e) {
-		  for (E e1 : e.getEnumConstants()) {
-		    if(e1.name().equals(s)) { return true; }
-		  }
-		  return false;
+	/**
+	 * 
+	 * @param string
+	 * @param enumClass
+	 * @param message
+	 * @throws InvalidInputExeption
+	 */
+	private <E extends Enum<E>> void provinceExistance(String string, Class<E> enumClass, String message) throws InvalidInputExeption {
+		boolean bool = true;
+		for (E e1 : enumClass.getEnumConstants()) {
+			if (e1.name().equals(string)) {
+				bool = true;
+			} else {
+				bool = false;
+			}
 		}
+		if (bool == false) {
+			new InvalidInputExeption("Not a valid perameter for field " + message);
+		}
+	}
 
 	/**
 	 * 
@@ -107,9 +121,7 @@ public class ContestantInformation {
 	 */
 	public void setProvince(String province) throws InvalidInputExeption {
 		this.province = province.replaceAll("\\s", "").toLowerCase();
-		if(provinceExistance(province,Province.class) == false){
-			throw new InvalidInputExeption("Province does not exist");
-		}
+		provinceExistance(province, Province.class, "Province");
 	}
 
 	/**

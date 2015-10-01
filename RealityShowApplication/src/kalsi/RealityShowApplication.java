@@ -34,8 +34,4 @@ public class RealityShowApplication {
 	
 	}
 
-	public void setMehtod(String[] s, ContestantInformation ci) {
-
-	}
-
 }
