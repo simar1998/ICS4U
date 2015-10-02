@@ -81,6 +81,7 @@ public class ContestantInformation {
 	 */
 	public void setFirstName(String firstName) throws InvalidInputExeption {
 		this.firstName = firstName.replaceAll("\\s", "").toLowerCase();
+		
 	}
 
 	/**

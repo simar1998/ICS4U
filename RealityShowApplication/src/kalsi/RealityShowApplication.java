@@ -49,14 +49,10 @@ public class RealityShowApplication {
 		boolean flag = true;
 		for (int i = 0; i < methods.length; i++) {
 			do {
-				try {
-					flag = false;
-					System.out.println(questions[i]);
-					String scannerInput = scanner.nextLine();
-					classContestantInfo.getDeclaredMethod(methods[i], parameters).invoke(contestant1, scannerInput);
-				} catch (InvalidInputExeption e) {
-					System.out.println(e.getMessage());
-				}
+				flag = false;
+				System.out.println(questions[i]);
+				String scannerInput = scanner.nextLine();
+				classContestantInfo.getDeclaredMethod(methods[i], parameters).invoke(contestant1, scannerInput);
 			} while (flag);
 		}
 
