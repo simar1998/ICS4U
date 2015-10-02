@@ -40,10 +40,10 @@ public class RealityShowApplication {
 				"What is your Street Name" , "What is your Sreet Number", "What city do you live in",
 				"What province are you in", "What is your postal code", "What is your phone no.",
 				"What is your birth date yyyy/mm/dd" };
-		String[] methods = {"setFirstName","setLastName","setStreeName",
+		String[] methods = {"setFirstName","setLastName","setStreetName",
 				"setStreetNumber","setCity","setProvince","setPostalCode","setPhoneNum",
 				"setBirthDate"};
-	
+
 		Class<?> classContestantInfo = Class.forName("kalsi.ContestantInformation");
 		Object objectCI = classContestantInfo.newInstance();
 		Class<String> parameters = String.class;

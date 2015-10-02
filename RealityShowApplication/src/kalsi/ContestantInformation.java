@@ -12,7 +12,6 @@ package kalsi;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 
 public class ContestantInformation {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
@@ -172,23 +171,6 @@ public class ContestantInformation {
 	public void setBirthDate(int yyyy, int mm, int dd) throws InvalidInputExeption {
 		this.birthDate.set(yyyy, mm, dd);
 		this.birthDateString = this.birthDate.toString();
-	}
-	
-	public void setAll(String[] s) throws InvalidInputExeption {
-		setFirstName(s[0]);
-		setLastName(s[1]);
-		setStreetName(s[2]);
-		setStreetNumber(s[3]);
-		setCity(s[4]);
-		setProvince(s[6]);
-		setPostalCode(s[5]);
-		setPhoneNum(s[7]);
-		String bDay = s[8];
-		String yyyy = Character.toString(bDay.charAt(0)) + Character.toString(bDay.charAt(1))
-				+ Character.toString(bDay.charAt(2)) + Character.toString(bDay.charAt(3));
-		String mm = Character.toString(bDay.charAt(4)) + Character.toString(bDay.charAt(5));
-		String dd = Character.toString(bDay.charAt(6)) + Character.toString(bDay.charAt(7));
-		setBirthDate(Integer.parseInt(yyyy), Integer.parseInt(mm), Integer.parseInt(dd));
 	}
 
 	/**
