@@ -42,9 +42,8 @@ public class RealityShowApplication {
 				"What is your postal code", "What is your phone no.", "What is your birth date yyyy/mm/dd" };
 		String[] methods = { "setFirstName", "setLastName", "setStreetName", "setStreetNumber", "setCity",
 				"setProvince", "setPostalCode", "setPhoneNum", "setBirthDate" };
-
+		
 		Class<?> classContestantInfo = Class.forName("kalsi.ContestantInformation");
-		Object objectCI = classContestantInfo.newInstance();
 		Class<String> parameters = String.class;
 		boolean flag = true;
 		for (int i = 0; i < methods.length; i++) {
