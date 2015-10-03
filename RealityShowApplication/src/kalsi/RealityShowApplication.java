@@ -32,7 +32,7 @@ public class RealityShowApplication {
 	 */
 	public static void main(String[] args)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, InvalidInputExeption, ClassNotFoundException, InstantiationException {
+			SecurityException, ClassNotFoundException, InstantiationException {
 		// TODO Auto-generated method stub
 		ContestantInformation contestant1 = new ContestantInformation();
 		ContestantInformation contestant2 = new ContestantInformation();
@@ -44,17 +44,27 @@ public class RealityShowApplication {
 				"setProvince", "setPostalCode", "setPhoneNum", "setBirthDate" };
 		
 		Class<?> classContestantInfo = Class.forName("kalsi.ContestantInformation");
-		Class<String> parameters = String.class;
+		Class<String> stringParameter = String.class;
+		Class<Integer> integerParameter = Integer.class;
 		boolean flag = true;
 		for (int i = 0; i < methods.length; i++) {
+			flag = true;
 			do {
-				flag = false;
+				try{
 				System.out.println(questions[i]);
 				String scannerInput = scanner.nextLine();
-				classContestantInfo.getDeclaredMethod(methods[i], parameters).invoke(contestant1, scannerInput);
-			} while (flag);
+				classContestantInfo.getDeclaredMethod(methods[i], stringParameter).invoke(contestant1, scannerInput);
+				flag = false;
+				}	catch(InvocationTargetException e){
+					 if(e.getCause() instanceof InvalidInputExeption){
+						 System.out.println(e.getCause().getMessage());
+					 }
+				}
+			}
+			 while (flag);
+			}
+		
 		}
 
 	}
 
-}

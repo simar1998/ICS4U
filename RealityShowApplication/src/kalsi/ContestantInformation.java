@@ -9,9 +9,9 @@
  */
 package kalsi;
 
+import java.lang.reflect.Array;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 
 public class ContestantInformation {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
@@ -22,13 +22,15 @@ public class ContestantInformation {
 	}
 
 	Province provinceEnum;
-	
+	private char[] newArrays;
+
 	/**
 	 * 
 	 */
 	public ContestantInformation() {
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * 
 	 * @param string
@@ -36,7 +38,8 @@ public class ContestantInformation {
 	 * @param message
 	 * @throws InvalidInputExeption
 	 */
-	private <E extends Enum<E>> void provinceExistance(String string, Class<E> enumClass, String message) throws InvalidInputExeption {
+	private <E extends Enum<E>> void provinceExistance(String string, Class<E> enumClass, String message)
+			throws InvalidInputExeption {
 		boolean bool = true;
 		for (E e1 : enumClass.getEnumConstants()) {
 			if (e1.name().equals(string)) {
@@ -80,8 +83,8 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setFirstName(String firstName) throws InvalidInputExeption {
+		checkInput(firstName, "Please only enter letter in the first name");
 		this.firstName = firstName.replaceAll("\\s", "").toLowerCase();
-		
 	}
 
 	/**
@@ -90,6 +93,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setLastName(String lastName) throws InvalidInputExeption {
+		checkInput(lastName, "Please only enter letter in the last name");
 		this.lastName = lastName.replaceAll("\\s", "").toLowerCase();
 	}
 
@@ -99,6 +103,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setStreetNumber(String streetNumber) throws InvalidInputExeption {
+		checkInput(streetNumber, "Please only enter numbers in the street number");
 		this.streetNumber = streetNumber.replaceAll("\\s", "").toLowerCase();
 	}
 
@@ -108,6 +113,7 @@ public class ContestantInformation {
 	 * @param streetName
 	 */
 	public void setStreetName(String streetName) throws InvalidInputExeption {
+		checkInput(streetName, "Please only enter letter in the street name name");
 		this.streetName = streetName.replaceAll("\\s", "").toLowerCase();
 	}
 
@@ -117,6 +123,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setCity(String city) throws InvalidInputExeption {
+		checkInput(city, "Please only enter letter in the city name");
 		this.city = city.replaceAll("\\s", "").toLowerCase();
 	}
 
@@ -126,6 +133,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setProvince(String province) throws InvalidInputExeption {
+		checkInput(province, "Please only put leters in the province name");
 		this.province = province.replaceAll("\\s", "").toLowerCase();
 		provinceExistance(province, Province.class, "Province");
 	}
@@ -159,6 +167,17 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setPhoneNum(String phoneNum) throws InvalidInputExeption {
+		checkInput(Integer.parseInt(phoneNum), "Please only enter numbers in the phone number");
+		if (!(phoneNum.length() == 9)) {
+			throw new InvalidInputExeption("Invalid phone number please enter new one");
+		} else if (phoneNum.charAt(0) != '1' && phoneNum.length() > 9) {
+			char[] array = phoneNum.toCharArray();
+			newArrays = null;
+			for (int i = 0; i < array.length; i++) {
+				newArrays[i] = array[i + 1];
+			}
+			phoneNum = newArrays.toString();
+		}
 		this.phoneNum = phoneNum.replaceAll("\\s", "").toLowerCase();
 	}
 
@@ -170,7 +189,9 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setBirthDate(int yyyy, int mm, int dd) throws InvalidInputExeption {
-		this.birthDate.set(yyyy, mm, dd);
+		String date = yyyy + "" + mm + "" + dd;
+		checkInput(Integer.parseInt(date), "Please only enter numbers in the date of birth");
+		this.birthDate.set(yyyy, mm - 1, dd);
 		this.birthDateString = this.birthDate.toString();
 	}
 
@@ -255,4 +276,22 @@ public class ContestantInformation {
 				+ phoneNum + " Birthdate: " + birthDate);
 	}
 
+	public void checkInput(String s, String message) throws InvalidInputExeption {
+		char[] array = s.toCharArray();
+		for (char c : array) {
+			if (!Character.isLetter(c)) {
+				throw new InvalidInputExeption(message);
+			}
+		}
+	}
+
+	public void checkInput(int i, String message) throws InvalidInputExeption {
+		String s = i + "";
+		char[] array = s.toCharArray();
+		for (char c : array) {
+			if (!Character.isDigit(c)) {
+				throw new InvalidInputExeption(message);
+			}
+		}
+	}
 }
