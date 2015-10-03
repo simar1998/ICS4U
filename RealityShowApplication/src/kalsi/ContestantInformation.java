@@ -41,15 +41,16 @@ public class ContestantInformation {
 	private <E extends Enum<E>> void provinceExistance(String string, Class<E> enumClass, String message)
 			throws InvalidInputExeption {
 		boolean bool = true;
-		for (E e1 : enumClass.getEnumConstants()) {
-			if (e1.name().equals(string)) {
-				bool = true;
-			} else {
+		for (E e : enumClass.getEnumConstants()) {
+			if (!e.name().equalsIgnoreCase(string)) {
 				bool = false;
+			} else {
+				bool = true;
+				break;
 			}
 		}
 		if (bool == false) {
-			new InvalidInputExeption("Not a valid perameter for field " + message);
+			throw new InvalidInputExeption("Not a valid perameter for field " + message);
 		}
 	}
 
@@ -103,7 +104,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setStreetNumber(String streetNumber) throws InvalidInputExeption {
-		checkInput(streetNumber, "Please only enter numbers in the street number");
+		checkInput(Integer.parseInt(streetNumber), "Please only enter numbers in the street number");
 		this.streetNumber = streetNumber.replaceAll("\\s", "").toLowerCase();
 	}
 
@@ -134,8 +135,8 @@ public class ContestantInformation {
 	 */
 	public void setProvince(String province) throws InvalidInputExeption {
 		checkInput(province, "Please only put leters in the province name");
-		this.province = province.replaceAll("\\s", "").toLowerCase();
 		provinceExistance(province, Province.class, "Province");
+		this.province = province.replaceAll("\\s", "").toLowerCase();
 	}
 
 	/**
@@ -151,10 +152,11 @@ public class ContestantInformation {
 		}
 		for (int i = 0; i < 6; i++) {
 			i++;
-			if (Character.isLetter(postalCode.charAt(i - 1))) {
+			
+			if (!Character.isLetter(postalCode.charAt(i - 1))) {
 				throw new InvalidInputExeption("Incorrect Format");
 			}
-			if (!Character.isLetter(postalCode.charAt(i))) {
+			if (!Character.isDigit(postalCode.charAt(i))) {
 				throw new InvalidInputExeption("Incorrect Format");
 			}
 		}
