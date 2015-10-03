@@ -217,7 +217,7 @@ public class ContestantInformation {
 	 * @return the street number
 	 */
 	public String getStreetNumber() {
-		return this.streetName;
+		return this.streetNumber;
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class ContestantInformation {
 		if(b == true){
 		char[] array = s.toCharArray();
 		for (char c : array) {
-			if (!Character.isLetter(c)) {
+			if (!Character.isLetter(c) && c != ' ') {
 				throw new InvalidInputExeption(message);
 			}
 		}

@@ -34,7 +34,7 @@ public class LabelClass {
  * @return
  */
 	private String formatAdress() {
-		return pascalCase(ci.getStreetName()) + " " + pascalCase(ci.getStreetNumber()) + " \n"
+		return pascalCase(ci.getStreetNumber()) + " " + pascalCase(ci.getStreetName()) + " \n"
 				+ pascalCase(ci.getCity()) + " " + pascalCase(ci.getProvince()) + "\n"
 				+ ci.getPostalCode().toUpperCase();
 	}
@@ -60,8 +60,8 @@ public class LabelClass {
 				array[i] = Character.toUpperCase(array[i]);
 			} else if (array[i - 1] != ' ' && i != 0) {
 				array[i] = Character.toLowerCase(array[i]);
-			} else if (array[i] == ' ') {
-				array[i + 1] = Character.toUpperCase(array[i + 1]);
+			} else if (array[i -1] == ' ') {
+				array[i] = Character.toUpperCase(array[i]);
 			}
 		}
 		return s = String.copyValueOf(array);
