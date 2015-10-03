@@ -63,6 +63,8 @@ public class RealityShowApplication {
 			}
 			 while (flag);
 			}
+		LabelClass label1 = new LabelClass(contestant1);
+		System.out.print(label1.toString());
 		
 		}
 

@@ -27,14 +27,14 @@ public class LabelClass {
  * @return
  */
 	private String formatName() {
-		return pascalCase(ci.getLastName()) + "," + pascalCase(ci.getLastName());
+		return pascalCase(ci.getFirstName()) + "," + pascalCase(ci.getLastName());
 	}
 /**
  * 
  * @return
  */
 	private String formatAdress() {
-		return pascalCase(ci.getStreetNumber()) + " " + pascalCase(ci.getStreetNumber()) + " \n"
+		return pascalCase(ci.getStreetName()) + " " + pascalCase(ci.getStreetNumber()) + " \n"
 				+ pascalCase(ci.getCity()) + " " + pascalCase(ci.getProvince()) + "\n"
 				+ ci.getPostalCode().toUpperCase();
 	}
@@ -46,7 +46,7 @@ public class LabelClass {
 		char[] pH = ci.getPhoneNum().toCharArray();
 		char[] fPH = { '(', pH[0], pH[1], pH[2], ')', ' ', pH[3], pH[4], pH[5], ' ', '-', ' ', pH[6], pH[7], pH[8],
 				pH[9] };
-		return fPH.toString();
+		return String.copyValueOf(fPH);
 	}
 /**
  * 
@@ -64,7 +64,7 @@ public class LabelClass {
 				array[i + 1] = Character.toUpperCase(array[i + 1]);
 			}
 		}
-		return s = array.toString();
+		return s = String.copyValueOf(array);
 	}
 	/**
 	 * 
