@@ -36,6 +36,21 @@ public class RealityShowApplication {
 		// TODO Auto-generated method stub
 		ContestantInformation contestant1 = new ContestantInformation();
 		ContestantInformation contestant2 = new ContestantInformation();
+		ArrayList <ContestantInformation> contestants = new ArrayList();
+		int contestantNum = 0;
+		Scanner scannerInput = new Scanner(System.in);
+		String inp = scannerInput.nextLine();
+		for(int i = 0; i <= contestantNum; i++){
+			switch(inp){
+			case "add" :
+				storeValues(contestant1);
+			}
+		}
+		storeValues(contestant1);
+		 		
+		}
+	public static void storeValues(ContestantInformation ci) throws IllegalAccessException,
+	IllegalArgumentException, NoSuchMethodException, SecurityException, ClassNotFoundException{
 		Scanner scanner = new Scanner(System.in);
 		String[] questions = { "What is your first name", "What is your last name", "What is your Street Name",
 				"What is your Sreet Number", "What city do you live in", "What province are you in",
@@ -53,8 +68,12 @@ public class RealityShowApplication {
 				try{
 				System.out.println(questions[i]);
 				String scannerInput = scanner.nextLine();
-				classContestantInfo.getDeclaredMethod(methods[i], stringParameter).invoke(contestant1, scannerInput);
+				classContestantInfo.getDeclaredMethod(methods[i], stringParameter).invoke(ci, scannerInput);
 				flag = false;
+				if(scannerInput.equals("exit this")){
+					System.out.println("Thank you for using reality show application form");
+					return;
+				}
 				}	catch(InvocationTargetException e){
 					 if(e.getCause() instanceof InvalidInputExeption){
 						 System.out.println(e.getCause().getMessage());
@@ -63,10 +82,8 @@ public class RealityShowApplication {
 			}
 			 while (flag);
 			}
-		LabelClass label1 = new LabelClass(contestant1);
-		System.out.print(label1.toString());
-		
-		}
+	}
+	
 
 	}
 
