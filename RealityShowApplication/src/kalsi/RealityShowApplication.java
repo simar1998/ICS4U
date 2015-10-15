@@ -40,17 +40,14 @@ public class RealityShowApplication {
 		Scanner scannerInput = new Scanner(System.in);
 		for (int i = 0; i <= contestantNum; i++) {
 			help();
-			pl(i+"");
 			String inp = scannerInput.nextLine();
-			contestantNum = contestants.size() -1;
-		
 			if(inp.equals("add new")){
 				contestants.add(contestant1);
 				storeValues(contestants.get(i));
 			}
 
 			if(inp.equals("get last")){
-				printContestant(contestants.get(i));
+				printContestant(contestants.get(i-1));
 			}
 
 			if(inp.equals("get contestant")){
@@ -60,8 +57,8 @@ public class RealityShowApplication {
 			if(inp.equals("help")){
 				help();
 			}
+			contestantNum = contestants.size();
 			}
-		
 	}
 
 	public static void storeValues(ContestantInformation ci) throws IllegalAccessException, IllegalArgumentException,
@@ -117,7 +114,6 @@ public class RealityShowApplication {
 		pl("Type (get last) to get the last stored contestant's information");
 		pl("type (get contestant) hit enter then type the number id of the contestant to retrive the contestant info");
 		pl("type (exit this) to exit");
-
 	}
 
 	public static void pl(String s) {

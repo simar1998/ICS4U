@@ -10,6 +10,7 @@
 package kalsi;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -297,7 +298,31 @@ public class ContestantInformation {
 		}
 	}
 
-	public void checkInput(int i, String message) throws InvalidInputExeption {
 
+	public Integer binarySearchClass(ArrayList<ContestantInformation> ci , ContestantInformation target){
+		int end = ci.size();
+		int midPoint;
+		int start = 0;
+		for(int i =0; i <end;i++){
+			midPoint = (end + start)/2; 
+			if(ci.get(midPoint).getClass().getName().compareTo(target.getClass().getName()) == 0){
+				return 0;
+			}
+			else if(ci.get(midPoint).getClass().getName().compareTo(target.getClass().getName()) == 1){
+				start = midPoint -1;
+			}
+			else if(ci.get(midPoint).getClass().getName().compareTo(target.getClass().getName()) == - 1){
+				end = midPoint + 1;
+			}
+		}
+		return -1;
 	}
+	public Integer equalTo(ContestantInformation ci){
+		if(this.getFirstName().equals(ci.getFirstName()) && this.getLastName().equals(ci.getLastName())){
+			return 0;
+		}
+		return -1;
+	}
+	
+	
 }
