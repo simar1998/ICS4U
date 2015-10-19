@@ -192,7 +192,6 @@ public class ContestantInformation {
 		String date = Character.toString(b.charAt(0))+Character.toString(b.charAt(1))+Character.toString(b.charAt(2))+
 				Character.toString(b.charAt(3)) + "" + Character.toString(b.charAt(4))+Character.toString(b.charAt(5)) + "" + 
 				Character.toString(b.charAt(6))+Character.toString(b.charAt(7));
-		checkInput(Integer.parseInt(date), "Please only enter numbers in the date of birth");
 		this.birthDate.set(yyyy, mm - 1, dd);
 		this.birthDateString = this.birthDate.toString();
 	}
@@ -299,29 +298,23 @@ public class ContestantInformation {
 	}
 
 
-	public Integer binarySearchClass(ArrayList<ContestantInformation> ci , ContestantInformation target){
-		int end = ci.size();
-		int midPoint;
-		int start = 0;
-		for(int i =0; i <end;i++){
-			midPoint = (end + start)/2; 
-			if(ci.get(midPoint).getClass().getName().compareTo(target.getClass().getName()) == 0){
-				return 0;
-			}
-			else if(ci.get(midPoint).getClass().getName().compareTo(target.getClass().getName()) == 1){
-				start = midPoint -1;
-			}
-			else if(ci.get(midPoint).getClass().getName().compareTo(target.getClass().getName()) == - 1){
-				end = midPoint + 1;
-			}
-		}
-		return -1;
-	}
-	public Integer equalTo(ContestantInformation ci){
+	public boolean equals(ContestantInformation ci){
 		if(this.getFirstName().equals(ci.getFirstName()) && this.getLastName().equals(ci.getLastName())){
+			return true;
+		}
+		return false; 
+	}
+	public Integer compareTo(ContestantInformation ci, ContestantInformation ci2){
+		if(ci.getFirstName().compareTo(ci2.getFirstName()) == 0){
 			return 0;
 		}
-		return -1;
+	    else if(ci.getFirstName().compareTo(ci2.getFirstName()) == -1){
+			return -1;
+		}
+	    else if(ci.getFirstName().compareTo(ci2.getFirstName()) == 1){
+			return 1;
+		}
+		return null;
 	}
 	
 	
