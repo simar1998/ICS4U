@@ -24,7 +24,7 @@ public class search {
 	 * @param target
 	 * @return
 	 */
-	public Integer binarySearchClass(ArrayList<ContestantInformation> ci, ContestantInformation target) {
+	public static Integer binarySearchClass(ArrayList<ContestantInformation> ci, ContestantInformation target) {
 		int end = ci.size();
 		int midPoint;
 		int start = 0;
@@ -51,7 +51,7 @@ public class search {
 	 * @param lastName
 	 * @return
 	 */
-	public Integer binarySearchClass(ArrayList<ContestantInformation> ci, String firstName, String lastName) {
+	public static Integer binarySearchClass(ArrayList<ContestantInformation> ci, String firstName, String lastName) {
 		int end = ci.size();
 		int midPoint;
 		int start = 0;
@@ -77,7 +77,7 @@ public class search {
 	 * @param target
 	 * @return
 	 */
-	public Integer linearSearch(ArrayList<ContestantInformation> ci, ContestantInformation target) {
+	public static Integer linearSearch(ArrayList<ContestantInformation> ci, ContestantInformation target) {
 		int length = ci.size();
 		for (int i = 0; i < length; i++) {
 			if (ci.get(i).getFirstName().equals(target.getFirstName())
@@ -95,7 +95,7 @@ public class search {
 	 * @param lastName
 	 * @return
 	 */
-	public Integer linearSearch(ArrayList<ContestantInformation> ci, String firstName, String lastName) {
+	public static Integer linearSearch(ArrayList<ContestantInformation> ci, String firstName, String lastName) {
 		int length = ci.size();
 		for (int i = 0; i < length; i++) {
 			if (ci.get(i).getFirstName().equals(firstName) && ci.get(i).getLastName().equals(lastName)) {

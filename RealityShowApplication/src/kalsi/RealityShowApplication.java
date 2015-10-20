@@ -38,7 +38,7 @@ public class RealityShowApplication {
 		ContestantInformation contestant1 = new ContestantInformation();
 		ArrayList<ContestantInformation> contestants = new ArrayList();
 		ArrayList<ContestantInformation> sortedContestant = contestants;
-		Collections.sort(sortedContestant);
+		//Collections.sort(sortedContestant);
 		int contestantNum = 0;
 		Scanner scannerInput = new Scanner(System.in);
 		for (int i = 0; i <= contestantNum; i++) {
@@ -141,10 +141,14 @@ public class RealityShowApplication {
 		System.out.println(s);
 	}
 
-	public static void search(String s) {
-		int stringLength = s.length();
-		for (int i = 0; i < stringLength; i++) {
-
+	public static void search(ArrayList<ContestantInformation> ci,  String firstName , String lastName) {
+		Scanner scanner = new Scanner(System.in);
+		pl("What is your first name");
+		firstName = scanner.nextLine();
+		pl("What is your last name");
+		lastName = scanner.nextLine();
+		if(search.linearSearch(ci, firstName, lastName)== 0){
+			
 		}
 	}
 
