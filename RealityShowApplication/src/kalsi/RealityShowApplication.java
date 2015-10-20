@@ -5,6 +5,7 @@ package kalsi;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -36,31 +37,42 @@ public class RealityShowApplication {
 		// TODO Auto-generated method stub
 		ContestantInformation contestant1 = new ContestantInformation();
 		ArrayList<ContestantInformation> contestants = new ArrayList();
+		ArrayList<ContestantInformation> sortedContestant = contestants;
+		Collections.sort(sortedContestant);
 		int contestantNum = 0;
 		Scanner scannerInput = new Scanner(System.in);
 		for (int i = 0; i <= contestantNum; i++) {
 			help();
 			String inp = scannerInput.nextLine();
-			if(inp.equals("add new")){
+			if (inp.equals("1")) {
 				contestants.add(contestant1);
 				storeValues(contestants.get(i));
 			}
 
-			if(inp.equals("get last")){
-				printContestant(contestants.get(i-1));
+			if (inp.equals("2")) {
+				printContestant(contestants.get(i - 1));
 			}
 
-			if(inp.equals("get contestant")){
+			if (inp.equals("3")) {
 				printContestant(contestants);
 			}
 
-			if(inp.equals("help")){
+			if (inp.equals("4")) {
 				help();
 			}
 			contestantNum = contestants.size();
-			}
+		}
 	}
 
+	/**
+	 * 
+	 * @param ci
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws NoSuchMethodException
+	 * @throws Secu`rityException
+	 * @throws ClassNotFoundException
+	 */
 	public static void storeValues(ContestantInformation ci) throws IllegalAccessException, IllegalArgumentException,
 			NoSuchMethodException, SecurityException, ClassNotFoundException {
 		Scanner scanner = new Scanner(System.in);
@@ -95,11 +107,19 @@ public class RealityShowApplication {
 		}
 	}
 
+	/**
+	 * 
+	 * @param ci
+	 */
 	public static void printContestant(ContestantInformation ci) {
 		LabelClass label = new LabelClass(ci);
 		System.out.print(label.toString());
 	}
 
+	/**
+	 * 
+	 * @param c
+	 */
 	public static void printContestant(ArrayList<ContestantInformation> c) {
 		pl("What contestant would you like to get the info of");
 		Scanner scanner = new Scanner(System.in);
@@ -110,15 +130,22 @@ public class RealityShowApplication {
 
 	public static void help() {
 		pl("REALITY SHOW APPLICATION HELP");
-		pl("Type (add new) to add new contestant");
-		pl("Type (get last) to get the last stored contestant's information");
-		pl("type (get contestant) hit enter then type the number id of the contestant to retrive the contestant info");
-		pl("type (exit this) to exit");
+		pl("Type ( 1 ) to add new contestant");
+		pl("Type ( 2 ) to get the last stored contestant's information");
+		pl("Type ( 3 ) hit enter then either type the contestant number or the contestant firstname and lastname");
+		pl("Example after hitting 4 you put the first name followed by a space then last name");
+		pl("type ( 4 ) to exit");
 	}
 
 	public static void pl(String s) {
 		System.out.println(s);
 	}
-	
+
+	public static void search(String s) {
+		int stringLength = s.length();
+		for (int i = 0; i < stringLength; i++) {
+
+		}
+	}
 
 }
