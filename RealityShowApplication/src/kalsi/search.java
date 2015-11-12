@@ -99,7 +99,7 @@ public class search {
 		int length = ci.size();
 		for (int i = 0; i < length; i++) {
 			if (ci.get(i).getFirstName().equals(firstName) && ci.get(i).getLastName().equals(lastName)) {
-				return 0;
+				return i;
 			}
 		}
 		return -1;
