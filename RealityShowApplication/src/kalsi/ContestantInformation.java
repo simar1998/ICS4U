@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ContestantInformation {
+public class ContestantInformation implements Comparable {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
 	private Calendar birthDate = new GregorianCalendar();
 
@@ -314,5 +314,8 @@ public class ContestantInformation {
 		}
 		return null;
 	}
+
+	@Override
+
 
 }

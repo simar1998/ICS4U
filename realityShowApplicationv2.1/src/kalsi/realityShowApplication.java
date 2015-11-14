@@ -15,12 +15,16 @@ import javax.swing.JSplitPane;
 import java.awt.TextField;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 import java.awt.Label;
 import java.awt.Button;
 import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -48,6 +52,8 @@ public class realityShowApplication extends JFrame {
 	String postalCode = "";
 	String phoneNumber = "";
 	String birthDate = "";
+	
+	String[] contestantString;
 	/**
 	 * Launch the application.
 	 */
@@ -160,12 +166,14 @@ public class realityShowApplication extends JFrame {
 		panel.setBounds(322, 11, 683, 366);
 		contentPane.add(panel);
 		panel.setLayout(null);
-
-		JList contestantsList = new JList();
+		
+		DefaultListModel<String> model = new DefaultListModel();
+		JList contestantsList = new JList(model);
 		contestantsList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		contestantsList.setBounds(10, 11, 232, 344);
-		JScrollPane listScroller = new JScrollPane(contestantsList);
+		//JScrollPane listScroller = new JScrollPane(contestantsList);
 		panel.add(contestantsList);
+		
 		
 		Label InformationOutputLabel = new Label("");
 		InformationOutputLabel.setBounds(248, 10, 425, 346);
@@ -233,6 +241,7 @@ public class realityShowApplication extends JFrame {
 		ArrayList<ContestantInformation> contestants = new ArrayList();
 		Scanner scanner = new Scanner(System.in);
 		String[] answers = new String[9];
+		ArrayList<String> nameField = new ArrayList<String>();
 		TextField[] inputField = { firstNameTextField, lastNameTextField, streetNameTextField, streetNumberTextField,
 				cityTextField, provinceTextField, postalCodeTextField, poneNumberTextField, birthDateTextField };
 		
@@ -241,7 +250,7 @@ public class realityShowApplication extends JFrame {
 		}
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				answers[0] = firstNameTextField.getText().toString();
+				/*answers[0] = firstNameTextField.getText().toString();
 				answers[1] = lastNameTextField.getText().toString();
 				answers[2] = streetNameTextField.getText().toString();
 				answers[3] = streetNumberTextField.getText().toString();
@@ -249,9 +258,13 @@ public class realityShowApplication extends JFrame {
 				answers[5] = provinceTextField.getText().toString();
 				answers[6] = postalCodeTextField.getText().toString();
 				answers[7] = poneNumberTextField.getText().toString();
-				answers[8] = birthDateTextField.getText().toString();
+				answers[8] = birthDateTextField.getText().toString();*/
+				for(int i=0;i<inputField.length;i++){
+					answers[i] = inputField[i].getText().toString();
+				}
 				
 			   try {
+				   contestantString = new String[contestants.size()];
 				   contestants.add(contestant1);
 				storeValues(contestants.get(contestants.size()-1) , answers);
 			} catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException
@@ -259,6 +272,25 @@ public class realityShowApplication extends JFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			   nameField.add(answers[0]+" "+answers[1]);
+			   model.addElement(nameField.get(nameField.size()-1));				
+			   contestantsList.setModel(model);
+			   System.out.println(model.size());/// DEBUG *******************
+			   clearTextField(inputField);
+			}
+		});
+		sortButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<String> namesList = new ArrayList<String>(model.size());
+				for(int  i= 0; i< model.size();i++){
+					namesList.add(model.get(i));
+				}
+				Collections.sort(namesList);
+				Collections.sort(contestants);
+				model.removeAllElements();
+				for(int i = 0;i< namesList.size();i++){
+					model.addElement(namesList.get(i));
+				}
 			}
 		});
 
@@ -293,11 +325,10 @@ public class realityShowApplication extends JFrame {
 	public static void pl(String s) {
 		System.out.println(s);
 	}
-
-	public static void updateList(JList list, ArrayList<ContestantInformation> contestants){
-		String[] contestantString = new String[contestants.size()];
-		for(int i = 0; i < contestants.size();i++){
-			
+	public void clearTextField(TextField[] txtField){
+		for(int i = 0; i < txtField.length;i++){
+			txtField[i].setText("");
 		}
 	}
+
 }

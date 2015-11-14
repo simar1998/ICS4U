@@ -1,4 +1,3 @@
-package kalsi;
 /**
  * class, ContestantInformation, to hold the information of each contestant. 
  * It should have fields for first name, last name, street address (street number 
@@ -8,13 +7,14 @@ package kalsi;
  * @author Simar Pal Kalsi
  * 
  */
-
+package kalsi;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ContestantInformation {
+public class ContestantInformation implements Comparable {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
 	private Calendar birthDate = new GregorianCalendar();
 
@@ -23,7 +23,6 @@ public class ContestantInformation {
 	}
 
 	Province provinceEnum;
-	private char[] newArrays;
 
 	/**
 	 * 
@@ -85,7 +84,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setFirstName(String firstName) throws InvalidInputExeption {
-		checkInput(firstName, "Please only enter letter in the first name",true);
+		checkInput(firstName, "Please only enter letter in the first name", true);
 		this.firstName = firstName.toLowerCase();
 	}
 
@@ -95,7 +94,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setLastName(String lastName) throws InvalidInputExeption {
-		checkInput(lastName, "Please only enter letter in the last name",true);
+		checkInput(lastName, "Please only enter letter in the last name", true);
 		this.lastName = lastName.toLowerCase();
 	}
 
@@ -105,7 +104,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setStreetNumber(String streetNumber) throws InvalidInputExeption {
-		checkInput(streetNumber, "Please only enter numbers in the street number",false);
+		checkInput(streetNumber, "Please only enter numbers in the street number", false);
 		this.streetNumber = streetNumber.toLowerCase();
 	}
 
@@ -115,7 +114,7 @@ public class ContestantInformation {
 	 * @param streetName
 	 */
 	public void setStreetName(String streetName) throws InvalidInputExeption {
-		checkInput(streetName, "Please only enter letter in the street name name",true);
+		checkInput(streetName, "Please only enter letter in the street name name", true);
 		this.streetName = streetName.toLowerCase();
 	}
 
@@ -125,7 +124,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setCity(String city) throws InvalidInputExeption {
-		checkInput(city, "Please only enter letter in the city name",true);
+		checkInput(city, "Please only enter letter in the city name", true);
 		this.city = city.toLowerCase();
 	}
 
@@ -135,7 +134,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setProvince(String province) throws InvalidInputExeption {
-		checkInput(province, "Please only put leters in the province name" ,true);
+		checkInput(province, "Please only put leters in the province name", true);
 		provinceExistance(province, Province.class, "Province");
 		this.province = province.toLowerCase();
 	}
@@ -153,7 +152,7 @@ public class ContestantInformation {
 		}
 		for (int i = 0; i < 6; i++) {
 			i++;
-			
+
 			if (!Character.isLetter(postalCode.charAt(i - 1))) {
 				throw new InvalidInputExeption("Incorrect Format");
 			}
@@ -170,7 +169,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setPhoneNum(String phoneNum) throws InvalidInputExeption {
-		checkInput(phoneNum, "Please only enter numbers in the phone number",false);
+		checkInput(phoneNum, "Please only enter numbers in the phone number", false);
 		if (phoneNum.length() != 10) {
 			throw new InvalidInputExeption("Invalid phone number please enter new one");
 		}
@@ -185,14 +184,14 @@ public class ContestantInformation {
 	 * @throws InvalidInputExeption
 	 */
 	public void setBirthDate(String b) throws InvalidInputExeption {
-		int yyyy = Integer.parseInt(Character.toString(b.charAt(0))+Character.toString(b.charAt(1))+Character.toString(b.charAt(2))+
-				Character.toString(b.charAt(3)));
-		int mm = Integer.parseInt(Character.toString(b.charAt(4))+Character.toString(b.charAt(5)));
-		int dd = Integer.parseInt(Character.toString(b.charAt(6))+Character.toString(b.charAt(7)));
-		String date = Character.toString(b.charAt(0))+Character.toString(b.charAt(1))+Character.toString(b.charAt(2))+
-				Character.toString(b.charAt(3)) + "" + Character.toString(b.charAt(4))+Character.toString(b.charAt(5)) + "" + 
-				Character.toString(b.charAt(6))+Character.toString(b.charAt(7));
-		checkInput(Integer.parseInt(date), "Please only enter numbers in the date of birth");
+		int yyyy = Integer.parseInt(Character.toString(b.charAt(0)) + Character.toString(b.charAt(1))
+				+ Character.toString(b.charAt(2)) + Character.toString(b.charAt(3)));
+		int mm = Integer.parseInt(Character.toString(b.charAt(4)) + Character.toString(b.charAt(5)));
+		int dd = Integer.parseInt(Character.toString(b.charAt(6)) + Character.toString(b.charAt(7)));
+		String date = Character.toString(b.charAt(0)) + Character.toString(b.charAt(1))
+				+ Character.toString(b.charAt(2)) + Character.toString(b.charAt(3)) + ""
+				+ Character.toString(b.charAt(4)) + Character.toString(b.charAt(5)) + ""
+				+ Character.toString(b.charAt(6)) + Character.toString(b.charAt(7));
 		this.birthDate.set(yyyy, mm - 1, dd);
 		this.birthDateString = this.birthDate.toString();
 	}
@@ -278,16 +277,16 @@ public class ContestantInformation {
 				+ phoneNum + " Birthdate: " + birthDate);
 	}
 
-	public void checkInput(String s, String message , boolean b) throws InvalidInputExeption {
-		if(b == true){
-		char[] array = s.toCharArray();
-		for (char c : array) {
-			if (!Character.isLetter(c) && c != ' ') {
-				throw new InvalidInputExeption(message);
+	public void checkInput(String s, String message, boolean b) throws InvalidInputExeption {
+		if (b == true) {
+			char[] array = s.toCharArray();
+			for (char c : array) {
+				if (!Character.isLetter(c) && c != ' ') {
+					throw new InvalidInputExeption(message);
+				}
 			}
 		}
-		}
-		if(b == false){
+		if (b == false) {
 			String s1 = s + "";
 			char[] array = s1.toCharArray();
 			for (char c : array) {
@@ -298,7 +297,16 @@ public class ContestantInformation {
 		}
 	}
 
-	public void checkInput(int i, String message) throws InvalidInputExeption {
-
+	public boolean equals(ContestantInformation ci) {
+		if (this.getFirstName().equals(ci.getFirstName()) && this.getLastName().equals(ci.getLastName())) {
+			return true;
+		}
+		return false;
 	}
+
+	public int compareTo(Object ci) {
+		return (this.getFirstName() + this.getLastName())
+				.compareTo(((ContestantInformation) ci).getFirstName() + ((ContestantInformation) ci).getLastName());
+	}
+
 }
