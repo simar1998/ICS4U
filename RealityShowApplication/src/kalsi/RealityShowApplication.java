@@ -4,10 +4,16 @@
  */
 package kalsi;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -32,15 +38,15 @@ public class RealityShowApplication {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 * @throws InstantiationException
+	 * @throws UnsupportedEncodingException 
+	 * @throws FileNotFoundException 
 	 */
 	public static void main(String[] args)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, ClassNotFoundException, InstantiationException {
+			SecurityException, ClassNotFoundException, InstantiationException, FileNotFoundException, UnsupportedEncodingException {
 		// TODO Auto-generated method stub
 		ContestantInformation contestant1 = new ContestantInformation();
-		ArrayList<ContestantInformation> contestants = new ArrayList();
-		ArrayList<ContestantInformation> sortedContestant = contestants;
-		//Collections.sort(sortedContestant);
+		ArrayList<ContestantInformation> contestants = new ArrayList<ContestantInformation>();
 		int contestantNum = 0;
 		Scanner scannerInput = new Scanner(System.in);
 		for (int i = 0; i <= contestantNum; i++) {
@@ -49,10 +55,11 @@ public class RealityShowApplication {
 			if (inp.equals("1")) {
 				contestants.add(contestant1);
 				storeValues(contestants.get(i));
+				toFile(contestants);
 			}
 
 			if (inp.equals("2")) {
-				printContestant(contestants.get(i - 1));
+				printContestant(contestants.get(contestants.size() - 1));
 			}
 
 			if (inp.equals("3")) {
@@ -60,7 +67,11 @@ public class RealityShowApplication {
 			}
 
 			if (inp.equals("4")) {
-				help();
+			Collections.sort(contestants);
+			pl("Sorted succesfully");
+			}
+			if (inp.equals("5")){
+				deleteContestant(contestants,)
 			}
 			contestantNum = contestants.size();
 		}
@@ -117,6 +128,16 @@ public class RealityShowApplication {
 		LabelClass label = new LabelClass(ci);
 		System.out.print(label.toString());
 	}
+	/**
+	 * 
+	 * @param ci
+	 * @return
+	 */
+	public static String printContestant1(ContestantInformation ci) {
+		LabelClass label = new LabelClass(ci);
+		return label.toString();
+	}
+	
 
 	/**
 	 * 
@@ -134,9 +155,12 @@ public class RealityShowApplication {
 		pl("REALITY SHOW APPLICATION HELP");
 		pl("Type ( 1 ) to add new contestant");
 		pl("Type ( 2 ) to get the last stored contestant's information");
-		pl("Type ( 3 ) hit enter then either type the contestant number or the contestant firstname and lastname");
-		pl("Example after hitting 4 you put the first name followed by a space then last name");
-		pl("type ( 4 ) to exit");
+		pl("Type ( 3 ) hit enter then type the contestant firstname and lastname");
+		pl("Type ( 4 ) to sort the contestant information");
+		pl("Type ( 5 ) to delete a contestant. After hitting 4 type the first name and last name of the contestant");
+		pl("Type ( 6 ) to save the contestant list to a text file");
+		pl("Type ( 7 ) to load from the save file");
+		pl("type ( 8 ) to exit");
 	}
 
 	public static void pl(String s) {
@@ -145,13 +169,56 @@ public class RealityShowApplication {
 
 	public static void search(ArrayList<ContestantInformation> ci,  String firstName , String lastName) {
 		Scanner scanner = new Scanner(System.in);
-		pl("What is your first name");
+		pl("first name for search parameter");
 		firstName = scanner.nextLine();
-		pl("What is your last name");
+		pl("last name for search parameter");
 		lastName = scanner.nextLine();
-		if(search.linearSearch(ci, firstName, lastName)== 0){
-			
+		if(search.linearSearch(ci, firstName, lastName)!= -1){
+			pl("Contestant Found here is the information");
+			pl("******************************************");
+			LabelClass label = new LabelClass(ci.get(search.linearSearch(ci, firstName, lastName)));
+			pl(label.toString());
 		}
 	}
-
+	public static void toFile(ArrayList<ContestantInformation> ci) throws FileNotFoundException, UnsupportedEncodingException{
+		final String FILE_NAME = "ContestantInfo.txt";
+		PrintWriter writer = new PrintWriter(FILE_NAME, "UTF-8");
+		writer.write(ci.size());
+		for(int i = 0; i < ci.size();i++){
+			writer.write("*");
+			writer.write(printContestant1(ci.get(i)));
+		}
+	}
+	public static void loadFile(){
+		final String FILE_NAME = "ContestantInfo.txt";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			pl("File not created, please save first");
+		}
+		
+	}
+	public static void deleteContestant(ArrayList<ContestantInformation> ci){
+		Scanner scanner = new Scanner(System.in);
+		pl("First name of contestant you want to delete");
+		String firstName = scanner.nextLine();
+		pl("Last name of the contestant you want to sort");
+		String lastName = scanner.nextLine();
+		pl("Are you sure you want to delete this contestant (y/n)");
+		String confirm = scanner.nextLine();
+		if(confirm.equalsIgnoreCase("y")){
+			delete(ci,search.linearSearch(ci, firstName, lastName));
+			pl("Contestant has been deleted");
+		}
+		else if(confirm.equalsIgnoreCase("n")){
+			pl("Canceling delete");
+			return;
+		}
+	}
+	public static void delete(ArrayList<ContestantInformation> ci , int index){
+		ci.remove(index);
+	}
+	
+	
 }
