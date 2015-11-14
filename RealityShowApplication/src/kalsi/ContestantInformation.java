@@ -192,8 +192,13 @@ public class ContestantInformation implements Comparable {
 				+ Character.toString(b.charAt(2)) + Character.toString(b.charAt(3)) + ""
 				+ Character.toString(b.charAt(4)) + Character.toString(b.charAt(5)) + ""
 				+ Character.toString(b.charAt(6)) + Character.toString(b.charAt(7));
-		this.birthDate.set(yyyy, mm - 1, dd);
+		this.birthDate.set(yyyy, mm, dd);
+		if(Calendar.getInstance().get(Calendar.YEAR)-yyyy >= 18){
 		this.birthDateString = this.birthDate.toString();
+		}
+		else{
+			throw new InvalidInputExeption("You are not 18");
+		}
 	}
 
 	/**
@@ -304,18 +309,10 @@ public class ContestantInformation implements Comparable {
 		return false;
 	}
 
-	public Integer compareTo(ContestantInformation ci, ContestantInformation ci2) {
-		if (ci.getFirstName().compareTo(ci2.getFirstName()) == 0) {
-			return 0;
-		} else if (ci.getFirstName().compareTo(ci2.getFirstName()) == -1) {
-			return -1;
-		} else if (ci.getFirstName().compareTo(ci2.getFirstName()) == 1) {
-			return 1;
-		}
-		return null;
+	public int compareTo(Object ci) {
+		return (this.getFirstName() + this.getLastName())
+				.compareTo(((ContestantInformation) ci).getFirstName() + ((ContestantInformation) ci).getLastName());
 	}
-
-	@Override
 
 
 }

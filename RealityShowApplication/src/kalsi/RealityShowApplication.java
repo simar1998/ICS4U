@@ -7,6 +7,7 @@ package kalsi;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -55,7 +56,6 @@ public class RealityShowApplication {
 			if (inp.equals("1")) {
 				contestants.add(contestant1);
 				storeValues(contestants.get(i));
-				toFile(contestants);
 			}
 
 			if (inp.equals("2")) {
@@ -71,9 +71,18 @@ public class RealityShowApplication {
 			pl("Sorted succesfully");
 			}
 			if (inp.equals("5")){
-				deleteContestant(contestants,)
+				deleteContestant(contestants);
 			}
-			contestantNum = contestants.size();
+			if(inp.equals("6")){
+				saveFile(contestants);
+			}
+			if(inp.equals("7")){
+				loadFile(contestants);
+			}
+			if(inp.equals("8")){
+				System.exit(0);
+			}
+			
 		}
 	}
 
@@ -150,7 +159,9 @@ public class RealityShowApplication {
 		LabelClass label = new LabelClass(c.get(i));
 		System.out.print(label.toString());
 	}
-
+	/**
+	 * 
+	 */
 	public static void help() {
 		pl("REALITY SHOW APPLICATION HELP");
 		pl("Type ( 1 ) to add new contestant");
@@ -162,11 +173,20 @@ public class RealityShowApplication {
 		pl("Type ( 7 ) to load from the save file");
 		pl("type ( 8 ) to exit");
 	}
-
+	/**
+	 * 
+	 * @param s
+	 */
 	public static void pl(String s) {
 		System.out.println(s);
 	}
 
+	/**
+	 * 
+	 * @param ci
+	 * @param firstName
+	 * @param lastName
+	 */
 	public static void search(ArrayList<ContestantInformation> ci,  String firstName , String lastName) {
 		Scanner scanner = new Scanner(System.in);
 		pl("first name for search parameter");
@@ -180,25 +200,133 @@ public class RealityShowApplication {
 			pl(label.toString());
 		}
 	}
-	public static void toFile(ArrayList<ContestantInformation> ci) throws FileNotFoundException, UnsupportedEncodingException{
-		final String FILE_NAME = "ContestantInfo.txt";
-		PrintWriter writer = new PrintWriter(FILE_NAME, "UTF-8");
-		writer.write(ci.size());
-		for(int i = 0; i < ci.size();i++){
-			writer.write("*");
-			writer.write(printContestant1(ci.get(i)));
-		}
-	}
-	public static void loadFile(){
-		final String FILE_NAME = "ContestantInfo.txt";
+	/**
+	 * 
+	 * @param contestants
+	 */
+	public static void loadFile(ArrayList<ContestantInformation> contestants){
+		BufferedReader bufferedReader = null;
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
-		} catch (FileNotFoundException e) {
+			bufferedReader = new BufferedReader(new FileReader("saveFile.txt"));
+		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			pl("File not created, please save first");
+			e1.printStackTrace();
 		}
+		int contestantNumbers = 0;
+		try {
+			contestantNumbers = Integer.parseInt(bufferedReader.readLine());
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		for (int k = 0; k < contestantNumbers; k++) {
+			contestants.add(new ContestantInformation());
+			String firstNameFromSave = null ;
+			String lastNameFromSave = null;
+			String streetNumberFromSave = null;
+			String streetAdressFromSave = null;
+			String cityFromSave= null;
+			String porvinceFromSave= null;
+			String postalCodeFromSave= null;
+			String phoneNumberFromSave= null;
+			try {
+				firstNameFromSave = bufferedReader.readLine();
+				lastNameFromSave = bufferedReader.readLine();
+				streetNumberFromSave = bufferedReader.readLine();
+				streetAdressFromSave = bufferedReader.readLine();
+				cityFromSave = bufferedReader.readLine();
+				porvinceFromSave = bufferedReader.readLine();
+				postalCodeFromSave = bufferedReader.readLine();
+				phoneNumberFromSave = bufferedReader.readLine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				contestants.get(k).setFirstName(firstNameFromSave);
+				contestants.get(k).setLastName(lastNameFromSave);
+				contestants.get(k).setStreetNumber(streetNumberFromSave);
+				contestants.get(k).setStreetName(streetAdressFromSave);
+				contestants.get(k).setCity(cityFromSave);
+				contestants.get(k).setProvince(porvinceFromSave);
+				contestants.get(k).setPostalCode(postalCodeFromSave);
+				contestants.get(k).setPhoneNum(phoneNumberFromSave);
+			} catch (InvalidInputExeption e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	}	
 		
 	}
+	/**
+	 * 
+	 * @param contestants
+	 */
+	public static void saveFile(ArrayList<ContestantInformation> contestants){
+		BufferedReader bufferedReader = null;
+		try {
+			bufferedReader = new BufferedReader(new FileReader("saveFile.txt"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		int contestantNumbers = 0;
+		try {
+			contestantNumbers = Integer.parseInt(bufferedReader.readLine());
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		for (int k = 0; k < contestantNumbers; k++) {
+			contestants.add(new ContestantInformation());
+			String firstNameFromSave = null ;
+			String lastNameFromSave = null;
+			String streetNumberFromSave = null;
+			String streetAdressFromSave = null;
+			String cityFromSave= null;
+			String porvinceFromSave= null;
+			String postalCodeFromSave= null;
+			String phoneNumberFromSave= null;
+			try {
+				firstNameFromSave = bufferedReader.readLine();
+				lastNameFromSave = bufferedReader.readLine();
+				streetNumberFromSave = bufferedReader.readLine();
+				streetAdressFromSave = bufferedReader.readLine();
+				cityFromSave = bufferedReader.readLine();
+				porvinceFromSave = bufferedReader.readLine();
+				postalCodeFromSave = bufferedReader.readLine();
+				phoneNumberFromSave = bufferedReader.readLine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				contestants.get(k).setFirstName(firstNameFromSave);
+				contestants.get(k).setLastName(lastNameFromSave);
+				contestants.get(k).setStreetNumber(streetNumberFromSave);
+				contestants.get(k).setStreetName(streetAdressFromSave);
+				contestants.get(k).setCity(cityFromSave);
+				contestants.get(k).setProvince(porvinceFromSave);
+				contestants.get(k).setPostalCode(postalCodeFromSave);
+				contestants.get(k).setPhoneNum(phoneNumberFromSave);
+			} catch (InvalidInputExeption e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	}	
+	}
+	/**
+	 * 
+	 * @param ci
+	 */
 	public static void deleteContestant(ArrayList<ContestantInformation> ci){
 		Scanner scanner = new Scanner(System.in);
 		pl("First name of contestant you want to delete");
@@ -216,6 +344,11 @@ public class RealityShowApplication {
 			return;
 		}
 	}
+	/**
+	 * 
+	 * @param ci
+	 * @param index
+	 */
 	public static void delete(ArrayList<ContestantInformation> ci , int index){
 		ci.remove(index);
 	}

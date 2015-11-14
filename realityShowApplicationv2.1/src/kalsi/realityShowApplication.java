@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 import java.awt.Label;
 import java.awt.Button;
@@ -27,8 +28,21 @@ import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
+import javax.swing.JTextArea;
 
 public class realityShowApplication extends JFrame {
 
@@ -54,6 +68,8 @@ public class realityShowApplication extends JFrame {
 	String birthDate = "";
 	
 	String[] contestantString;
+	static TextField[] inputField;
+	public static final String fileName = "save.prop";
 	/**
 	 * Launch the application.
 	 */
@@ -72,8 +88,9 @@ public class realityShowApplication extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
 	 */
-	public realityShowApplication() {
+	public realityShowApplication() throws IOException {		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1050, 540);
 		contentPane = new JPanel();
@@ -170,38 +187,38 @@ public class realityShowApplication extends JFrame {
 		DefaultListModel<String> model = new DefaultListModel();
 		JList contestantsList = new JList(model);
 		contestantsList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		contestantsList.setBounds(10, 11, 232, 344);
+		contestantsList.setBounds(10, 37, 232, 318);
 		//JScrollPane listScroller = new JScrollPane(contestantsList);
 		panel.add(contestantsList);
 		
+		Button deleteItemButton = new Button("Delete selected item");
+		deleteItemButton.setBounds(10, 10, 148, 22);
+		panel.add(deleteItemButton);
 		
-		Label InformationOutputLabel = new Label("");
-		InformationOutputLabel.setBounds(248, 10, 425, 346);
-		panel.add(InformationOutputLabel);
+		Button viewInfoButton = new Button("View Info");
+		viewInfoButton.setBounds(164, 9, 78, 22);
+		panel.add(viewInfoButton);
+		
+		JTextArea outputTextArea = new JTextArea();
+		outputTextArea.setEditable(false);
+		outputTextArea.setBounds(252, 37, 421, 318);
+		panel.add(outputTextArea);
 		
 		Panel panel_1 = new Panel();
 		panel_1.setBounds(10, 385, 304, 106);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		TextField standardSaveLocation = new TextField();
-		standardSaveLocation.setBounds(10, 10, 172, 22);
-		panel_1.add(standardSaveLocation);
-		
-		Label label_12 = new Label("Save Location");
-		label_12.setBounds(188, 10, 92, 22);
-		panel_1.add(label_12);
-		
 		Button saveButton = new Button("Save");
-		saveButton.setBounds(10, 38, 80, 22);
+		saveButton.setBounds(10, 10, 133, 50);
 		panel_1.add(saveButton);
 		
 		Button loadButton = new Button("Load");
-		loadButton.setBounds(96, 38, 86, 22);
+		loadButton.setBounds(168, 10, 126, 50);
 		panel_1.add(loadButton);
 		
 		Button sortButton = new Button("Sort Button");
-		sortButton.setBounds(10, 66, 172, 30);
+		sortButton.setBounds(10, 66, 284, 30);
 		panel_1.add(sortButton);
 		
 		Panel panel_2 = new Panel();
@@ -209,17 +226,17 @@ public class realityShowApplication extends JFrame {
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 		
-		TextField textField = new TextField();
-		textField.setBounds(10, 10, 112, 22);
-		panel_2.add(textField);
+		TextField firstNameSearchTextField = new TextField();
+		firstNameSearchTextField.setBounds(10, 10, 112, 22);
+		panel_2.add(firstNameSearchTextField);
 		
 		Label label_10 = new Label("Search first name");
 		label_10.setBounds(128, 10, 114, 22);
 		panel_2.add(label_10);
 		
-		TextField textField_1 = new TextField();
-		textField_1.setBounds(10, 38, 112, 22);
-		panel_2.add(textField_1);
+		TextField lastNameSearchTextField = new TextField();
+		lastNameSearchTextField.setBounds(10, 38, 112, 22);
+		panel_2.add(lastNameSearchTextField);
 		
 		Label label_11 = new Label("Search last name");
 		label_11.setBounds(128, 38, 104, 22);
@@ -232,8 +249,16 @@ public class realityShowApplication extends JFrame {
 		Panel panel_3 = new Panel();
 		panel_3.setBounds(556, 401, 449, 90);
 		contentPane.add(panel_3);
+		panel_3.setLayout(null);
 		
-		Label label_13 = new Label("Advanced Search");
+		JTextArea txtrIfYouDecide = new JTextArea();
+		txtrIfYouDecide.setLineWrap(true);
+		txtrIfYouDecide.setText("If you decide not to add a contestant mid way through the entering prcess you must add a contestant with fake information then delete itthorugh  the gui");
+		txtrIfYouDecide.setEditable(false);
+		txtrIfYouDecide.setBounds(10, 11, 429, 68);
+		panel_3.add(txtrIfYouDecide);	
+		
+		Label label_13 = new Label("Information Pane");
 		label_13.setBounds(727, 383, 102, 22);
 		contentPane.add(label_13);
 		this.setTitle("Reality Show Application");
@@ -250,15 +275,6 @@ public class realityShowApplication extends JFrame {
 		}
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*answers[0] = firstNameTextField.getText().toString();
-				answers[1] = lastNameTextField.getText().toString();
-				answers[2] = streetNameTextField.getText().toString();
-				answers[3] = streetNumberTextField.getText().toString();
-				answers[4] = cityTextField.getText().toString();
-				answers[5] = provinceTextField.getText().toString();
-				answers[6] = postalCodeTextField.getText().toString();
-				answers[7] = poneNumberTextField.getText().toString();
-				answers[8] = birthDateTextField.getText().toString();*/
 				for(int i=0;i<inputField.length;i++){
 					answers[i] = inputField[i].getText().toString();
 				}
@@ -275,7 +291,6 @@ public class realityShowApplication extends JFrame {
 			   nameField.add(answers[0]+" "+answers[1]);
 			   model.addElement(nameField.get(nameField.size()-1));				
 			   contestantsList.setModel(model);
-			   System.out.println(model.size());/// DEBUG *******************
 			   clearTextField(inputField);
 			}
 		});
@@ -293,6 +308,124 @@ public class realityShowApplication extends JFrame {
 				}
 			}
 		});
+		deleteItemButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 int selectedIndex = contestantsList.getSelectedIndex();
+				 if(selectedIndex !=-1){
+					 contestants.remove(selectedIndex);
+					 model.remove(selectedIndex);
+				 }
+			}
+		});
+		viewInfoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = contestantsList.getSelectedIndex();
+				 if(selectedIndex !=-1){
+					LabelClass label = new LabelClass(contestants.get(selectedIndex));
+					outputTextArea.setText("");
+					outputTextArea.setText(label.toString());
+				 }
+			}
+		});
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String firstNameSearch = firstNameSearchTextField.getText().toString();
+				String lastNameSearch = lastNameSearchTextField.getText().toString();
+				if(search.linearSearch(contestants , firstNameSearch , lastNameSearch) != -1){
+					int searchIndex = search.linearSearch(contestants , firstNameSearch , lastNameSearch);
+					LabelClass label = new LabelClass(contestants.get(searchIndex));
+					outputTextArea.setText("");
+					outputTextArea.setText(label.toString());
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Contestant does not exist");
+					firstNameSearchTextField.setText("");
+					lastNameSearchTextField.setText("");
+				}
+			}
+		});
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FileOutputStream fileOutputStream = null;
+				try {
+					fileOutputStream = new FileOutputStream(fileName);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				PrintStream fps = new PrintStream(fileOutputStream);
+				fps.println(contestants.size());
+				for (int j = 0; j < contestants.size(); j++) {
+					fps.println(contestants.get(j).getFirstName());
+					fps.println(contestants.get(j).getLastName());
+					fps.println(contestants.get(j).getStreetNumber());
+					fps.println(contestants.get(j).getStreetName());
+					fps.println(contestants.get(j).getCity());
+					fps.println(contestants.get(j).getProvince());
+					fps.println(contestants.get(j).getPostalCode());
+					fps.println(contestants.get(j).getPhoneNum());
+				}
+				JOptionPane.showMessageDialog(null, "List Saved");
+			}
+		});
+		loadButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BufferedReader bufferedReader = null;
+				try {
+					bufferedReader = new BufferedReader(new FileReader(fileName));
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				int contestantNumbers = 0;
+				try {
+					contestantNumbers = Integer.parseInt(bufferedReader.readLine());
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				for (int k = 0; k < contestantNumbers; k++) {
+					contestants.add(new ContestantInformation());
+					String firstNameFromSave = null ;
+					String lastNameFromSave = null;
+					String streetNumberFromSave = null;
+					String streetAdressFromSave = null;
+					String cityFromSave= null;
+					String porvinceFromSave= null;
+					String postalCodeFromSave= null;
+					String phoneNumberFromSave= null;
+					try {
+						firstNameFromSave = bufferedReader.readLine();
+						lastNameFromSave = bufferedReader.readLine();
+						streetNumberFromSave = bufferedReader.readLine();
+						streetAdressFromSave = bufferedReader.readLine();
+						cityFromSave = bufferedReader.readLine();
+						porvinceFromSave = bufferedReader.readLine();
+						postalCodeFromSave = bufferedReader.readLine();
+						phoneNumberFromSave = bufferedReader.readLine();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try {
+						contestants.get(k).setFirstName(firstNameFromSave);
+						contestants.get(k).setLastName(lastNameFromSave);
+						contestants.get(k).setStreetNumber(streetNumberFromSave);
+						contestants.get(k).setStreetName(streetAdressFromSave);
+						contestants.get(k).setCity(cityFromSave);
+						contestants.get(k).setProvince(porvinceFromSave);
+						contestants.get(k).setPostalCode(postalCodeFromSave);
+						contestants.get(k).setPhoneNum(phoneNumberFromSave);
+					} catch (InvalidInputExeption e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}	
+		}});
 
 	}
 
@@ -315,7 +448,11 @@ public class realityShowApplication extends JFrame {
 					flag = false;
 				} catch (InvocationTargetException e) {
 					if (e.getCause() instanceof InvalidInputExeption) {
-						JOptionPane.showMessageDialog(null, e.getCause().getMessage());
+						answersArray[i] = JOptionPane.showInputDialog(null, e.getCause().getMessage());
+						if(answersArray[i].equals(JOptionPane.CANCEL_OPTION)){
+							clearTextField(inputField);
+							System.exit(0);
+						}
 					}
 				}
 			} while (flag);
@@ -325,10 +462,9 @@ public class realityShowApplication extends JFrame {
 	public static void pl(String s) {
 		System.out.println(s);
 	}
-	public void clearTextField(TextField[] txtField){
+	public static void clearTextField(TextField[] txtField){
 		for(int i = 0; i < txtField.length;i++){
 			txtField[i].setText("");
 		}
 	}
-
 }

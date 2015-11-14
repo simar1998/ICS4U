@@ -73,5 +73,8 @@ public class LabelClass {
 	public String toString(){
 		return formatName()+"\n"+formatAdress()+"\n"+formatNumber();
 	}
+	public String saveFormat(){
+		return "1"+ci.getFirstName()+"2"+ci.getLastName()+"3";
+	}
 
 }
