@@ -75,9 +75,11 @@ public class RealityShowApplication {
 			}
 			if(inp.equals("6")){
 				saveFile(contestants);
+				pl("save succesfull");
 			}
 			if(inp.equals("7")){
 				loadFile(contestants);
+				pl("load succesfull");
 			}
 			if(inp.equals("8")){
 				System.exit(0);
