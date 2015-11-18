@@ -53,6 +53,7 @@ public class RealityShowApplication {
 		for (int i = 0; i <= contestantNum; i++) {
 			help();
 			String inp = scannerInput.nextLine();
+			contestantNum = contestantNum +1;
 			if (inp.equals("1")) {
 				contestants.add(contestant1);
 				storeValues(contestants.get(i));
@@ -82,7 +83,7 @@ public class RealityShowApplication {
 				pl("load succesfull");
 			}
 			if(inp.equals("8")){
-				System.exit(0);
+				return;
 			}
 			
 		}
