@@ -68,9 +68,11 @@ public class GamePanel extends JPanel implements Runnable {
 	static int boxSpeed = 5;
 	static int points = 0;
 
-	/** main program (entry point) 
-	 * @throws IOException */
-	public static void main(String[] args) throws IOException {
+/**
+ * This is the main class it executed the code
+ * @param args String args
+ */
+	public static void main(String[] args) {
 		
 		// Set up main window (using Swing's Jframe)
 	    frame = new JFrame("Dodgeball");
