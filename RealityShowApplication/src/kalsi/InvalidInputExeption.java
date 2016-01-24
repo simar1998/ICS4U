@@ -6,10 +6,16 @@ package kalsi;
 /**
  * @author Simar Pal Kalsi
  * 
- * This throws an exception if there is a input field that does not meet the required type
+ *         This throws an exception if there is a input field that does not meet
+ *         the required type
  *
  */
 public class InvalidInputExeption extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 

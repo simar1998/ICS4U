@@ -1,0 +1,76 @@
+/**
+ * 
+ */
+package sortingAssignment;
+
+import java.util.Scanner;
+
+/**
+ * @author simarpal
+ *
+ */
+public class userInput {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int[] array = null;
+		while(true){
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(System.in);
+			help();
+			int input = Integer.parseInt(scanner.nextLine());
+			if(input == 1){
+				array = addArray();
+			}
+			if(input == 2){
+				pl(sortingClass.selectionSort(array));
+			}
+			if(input == 3){
+				pl(sortingClass.insertSort(array));
+			}
+			if(input == 4){
+				pl(sortingClass.bubbleSortDumb(array));
+			}
+			if(input == 5){
+				pl(sortingClass.quickSort(array));
+			}
+			if(input == 6){
+				pl(sortingClass.mergeSort(array));
+			}
+			if(input == 7){
+				System.exit(0);
+			}
+			
+		}
+	}
+	/**
+	 * Method prints all the option in the main menu
+	 */
+	public static void help(){
+		pl("Please enter (1) to add new un sortted array");
+		pl("Please enter (2) to sort array using selection sort");
+		pl("Please enter (3) to sort array using insert sort");
+		pl("Please enter (4) to sort using buuble sort");
+		pl("Please enter (5) to sort using quick sort");
+		pl("Please enter (6) to sort using merge sort");
+		pl("Please enter (7) to ending it out of here");
+	}
+	public static int[] addArray(){
+		pl("How many numbers are in your array");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		int index = Integer.parseInt(scanner.nextLine());
+		int[] list = new int[index];
+		for(int i = 0; i<index;i++){
+			pl(" what is your "+ (i+1) +" Number");
+			list[i] = Integer.parseInt(scanner.nextLine());
+		}
+		return list;
+	}
+	public static void pl(String s){
+		System.out.println(s);
+	}
+
+}

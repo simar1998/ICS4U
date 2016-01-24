@@ -9,15 +9,26 @@
  */
 package kalsi;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * Conetstant information class stores the contesdtant objects
+ * 
+ * @author simarpal
+ *
+ */
+@SuppressWarnings("rawtypes")
 public class ContestantInformation implements Comparable {
 	private String firstName, lastName, city, province, postalCode, streetName, streetNumber, phoneNum, birthDateString;
 	private Calendar birthDate = new GregorianCalendar();
 
+	/**
+	 * Enum containing all valid parameterss
+	 * 
+	 * @author simarpal
+	 *
+	 */
 	public enum Province {
 		on, bc, pe, ab, mb, nb, bl, ns, nt, qc, sk, yt, Alberta, BritishColumbia, Manitoba, NewBrunswick, NewfoundlandandLabrador, NovaScotia, Ontario, PrinceEdwardIsland, Quebec, Saskatchewan, NorthwestTerritories, Nunavut, Yukon
 	}
@@ -32,6 +43,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * Checks if given value exists in the enum given
 	 * 
 	 * @param string
 	 * @param enumClass
@@ -55,6 +67,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * Contructor
 	 * 
 	 * @param firstName
 	 * @param lastName
@@ -79,6 +92,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * Sets frist name
 	 * 
 	 * @param firstName
 	 * @throws InvalidInputExeption
@@ -89,6 +103,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * last name
 	 * 
 	 * @param lastName
 	 * @throws InvalidInputExeption
@@ -99,6 +114,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * setStreet Number
 	 * 
 	 * @param streetNumber
 	 * @throws InvalidInputExeption
@@ -109,6 +125,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * Set street nname
 	 * 
 	 * @throws InvalidInputExeption
 	 * @param streetName
@@ -119,6 +136,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * set city
 	 * 
 	 * @param city
 	 * @throws InvalidInputExeption
@@ -129,6 +147,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * set province
 	 * 
 	 * @param province
 	 * @throws InvalidInputExeption
@@ -140,6 +159,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * set postal code
 	 * 
 	 * @param postalCode
 	 * @throws InvalidInputExeption
@@ -164,6 +184,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * set phone number
 	 * 
 	 * @param phoneNum
 	 * @throws InvalidInputExeption
@@ -176,32 +197,44 @@ public class ContestantInformation implements Comparable {
 		this.phoneNum = phoneNum.toLowerCase();
 	}
 
-	/**
-	 * 
-	 * @param yyyy
-	 * @param mm
-	 * @param dd
-	 * @throws InvalidInputExeption
-	 */
-	public void setBirthDate(String b) throws InvalidInputExeption {
+/**
+ * Sets birthdate
+ * @param a
+ * @return
+ * @throws InvalidInputExeption
+ */
+	public boolean setBirthDate(String a) throws InvalidInputExeption {
+		String b = a.replaceAll("/", "");
+
 		int yyyy = Integer.parseInt(Character.toString(b.charAt(0)) + Character.toString(b.charAt(1))
 				+ Character.toString(b.charAt(2)) + Character.toString(b.charAt(3)));
 		int mm = Integer.parseInt(Character.toString(b.charAt(4)) + Character.toString(b.charAt(5)));
 		int dd = Integer.parseInt(Character.toString(b.charAt(6)) + Character.toString(b.charAt(7)));
+		@SuppressWarnings("unused")
 		String date = Character.toString(b.charAt(0)) + Character.toString(b.charAt(1))
 				+ Character.toString(b.charAt(2)) + Character.toString(b.charAt(3)) + ""
 				+ Character.toString(b.charAt(4)) + Character.toString(b.charAt(5)) + ""
 				+ Character.toString(b.charAt(6)) + Character.toString(b.charAt(7));
 		this.birthDate.set(yyyy, mm, dd);
-		if(Calendar.getInstance().get(Calendar.YEAR)-yyyy >= 18){
-		this.birthDateString = this.birthDate.toString();
-		}
-		else{
+		String YYYY = yyyy + "";
+		String MM = mm + "";
+		String DD = dd + "";
+		if (Calendar.getInstance().get(Calendar.YEAR) - yyyy >= 18) {
+			if (mm < 10) {
+				MM = "0" + MM;
+			}
+			if (dd < 10) {
+				DD = "0" + DD;
+			}
+			this.birthDateString = YYYY + MM + DD;
+			return true;
+		} else {
 			throw new InvalidInputExeption("You are not 18");
 		}
 	}
 
 	/**
+	 * gets firts name
 	 * 
 	 * @return the first name
 	 */
@@ -210,6 +243,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * gest last name
 	 * 
 	 * @return the lastName
 	 */
@@ -218,6 +252,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * gets streets number
 	 * 
 	 * @return the street number
 	 */
@@ -226,6 +261,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * gets street name
 	 * 
 	 * @return the street name
 	 */
@@ -234,6 +270,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * gets city
 	 * 
 	 * @return the city
 	 */
@@ -242,6 +279,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * gets privince
 	 * 
 	 * @return the province
 	 */
@@ -250,6 +288,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * gets postal code
 	 * 
 	 * @return the Postal Code
 	 */
@@ -258,6 +297,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * gets phone number
 	 * 
 	 * @return the Phone Number
 	 */
@@ -266,6 +306,7 @@ public class ContestantInformation implements Comparable {
 	}
 
 	/**
+	 * getrs birthdate
 	 * 
 	 * @return the birthDate
 	 */
@@ -302,6 +343,11 @@ public class ContestantInformation implements Comparable {
 		}
 	}
 
+	/**
+	 * checks if a object is equal to a current objets
+	 * 
+	 * @param ci
+	 */
 	public boolean equals(ContestantInformation ci) {
 		if (this.getFirstName().equals(ci.getFirstName()) && this.getLastName().equals(ci.getLastName())) {
 			return true;
@@ -309,10 +355,12 @@ public class ContestantInformation implements Comparable {
 		return false;
 	}
 
+	/**
+	 * compares the values of a object with the current object
+	 */
 	public int compareTo(Object ci) {
 		return (this.getFirstName() + this.getLastName())
 				.compareTo(((ContestantInformation) ci).getFirstName() + ((ContestantInformation) ci).getLastName());
 	}
-
 
 }

@@ -19,6 +19,7 @@ public class search {
 	}
 
 	/**
+	 * Uses binary search to search object
 	 * 
 	 * @param ci
 	 * @param target
@@ -45,6 +46,7 @@ public class search {
 	}
 
 	/**
+	 * Uses binary search to search object using first and last name
 	 * 
 	 * @param ci
 	 * @param firstName
@@ -72,6 +74,7 @@ public class search {
 	}
 
 	/**
+	 * uses linear search to search for object
 	 * 
 	 * @param ci
 	 * @param target
@@ -89,6 +92,7 @@ public class search {
 	}
 
 	/**
+	 * Uses linear search to search object using first and last name
 	 * 
 	 * @param ci
 	 * @param firstName
